@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - AllôBénin</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .faq-item {
+      transition: all 0.3s;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .active-category {
+      background-color: #2F855A !important;
+      color: white !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+  <header class="bg-green-500 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center">
+        <div class="bg-yellow-400 p-2 rounded-full mr-2">
+          <i class='bx bx-phone-call text-white text-2xl'></i>
+        </div>
+        <span class="text-2xl font-bold text-green-800">AllôBénin</span>
+      </a>
+      
+      <!-- Navigation Desktop -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html" class="text-white">Accueil</a>
+        <a href="services.html" class="text-white">Parcourir les services</a>
+        <a href="about.html" class="text-white">À propos</a>
+        <a href="contact.html" class="text-white">Contact</a>
+        <a href="faq.html" class="text-white border-b border-white">FAQ</a>
+      </nav>
+
+      <!-- Menu Mobile -->
+      <button id="mobileMenuButton" class="md:hidden text-green-800">
+        <i class='bx bx-menu text-3xl'></i>
+      </button>
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-4 pb-4">
+      <a href="index.html" class="block py-2">Accueil</a>
+      <a href="services.html"class="block py-2">Parcourir les services</a>
+      <a href="about.html" class="block py-2">À propos</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+      <a href="faq.html" class="block py-2 text-green-800">FAQ</a>
+    </div>
+  </header>
+  
+  <!-- Contenu FAQ -->
+  <main class="container mx-auto px-4 py-8 max-w-3xl">
+    <section class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-4">Foire Aux Questions</h1>
+      <p class="text-lg text-gray-600">Trouvez rapidement des réponses à vos questions</p>
+    </section>
+
+    <!-- Recherche -->
+    <div class="mb-8 relative">
+      <input type="text" id="faqSearch" oninput="searchFAQ()" placeholder="Rechercher dans les questions..." class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+      <i class='bx bx-search absolute left-3 top-3.5 text-gray-400'></i>
+    </div>
+
+    <!-- Catégories -->
+    <div class="mb-8 flex flex-wrap gap-2">
+      <button onclick="filterFAQ('all')" class="faq-category-btn px-4 py-2 bg-green-600 text-white rounded-full text-sm font-medium active-category" data-category-btn="all">Toutes</button>
+      <button onclick="filterFAQ('general')" class="faq-category-btn px-4 py-2 bg-gray-200 rounded-full text-sm" data-category-btn="general">Général</button>
+      <button onclick="filterFAQ('numeros')" class="faq-category-btn px-4 py-2 bg-gray-200 rounded-full text-sm" data-category-btn="numeros">Numéros</button>
+      <button onclick="filterFAQ('paiements')" class="faq-category-btn px-4 py-2 bg-gray-200 rounded-full text-sm" data-category-btn="paiements">Paiements</button>
+      <button onclick="filterFAQ('premium')" class="faq-category-btn px-4 py-2 bg-gray-200 rounded-full text-sm" data-category-btn="premium">Premium</button>
+    </div>
+
+    <!-- Liste des questions -->
+    <div class="space-y-4" id="faqContainer">
+      <!-- Général -->
+      <div class="faq-item bg-white p-5 rounded-xl shadow-md" data-category="general">
+        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(1)" aria-expanded="false">
+          <h3 class="font-bold text-green-800">Qu’est-ce qu’AllôBénin ?</h3>
+          <i class='bx bx-chevron-down text-xl text-gray-500'></i>
+        </div>
+        <div id="faq-answer-1" class="faq-answer mt-3 text-gray-700">
+          <p>AllôBénin est un annuaire numérique moderne qui centralise les numéros utiles au Bénin : services publics, urgences, entreprises, artisans, etc.</p>
+        </div>
+      </div>
+
+      <!-- Numéros -->
+      <div class="faq-item bg-white p-5 rounded-xl shadow-md" data-category="numeros">
+        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(2)" aria-expanded="false">
+          <h3 class="font-bold text-green-800">Comment ajouter mon numéro à la plateforme ?</h3>
+          <i class='bx bx-chevron-down text-xl text-gray-500'></i>
+        </div>
+        <div id="faq-answer-2" class="faq-answer mt-3 text-gray-700">
+          <p>Rendez-vous sur la page <a href="contact.html" class="text-green-600 underline">Contact</a>, remplissez le formulaire et notre équipe vous contactera pour la validation.</p>
+        </div>
+      </div>
+
+      <!-- Paiements -->
+      <div class="faq-item bg-white p-5 rounded-xl shadow-md" data-category="paiements">
+        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(3)" aria-expanded="false">
+          <h3 class="font-bold text-green-800">Pourquoi certains numéros sont-ils payants ?</h3>
+          <i class='bx bx-chevron-down text-xl text-gray-500'></i>
+        </div>
+        <div id="faq-answer-3" class="faq-answer mt-3 text-gray-700">
+          <p>Certains numéros nécessitent une vérification continue, un support dédié ou sont premium. Ces frais assurent la fiabilité et la rapidité du service.</p>
+        </div>
+      </div>
+
+      <!-- Premium -->
+      <div class="faq-item bg-white p-5 rounded-xl shadow-md" data-category="premium">
+        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(4)" aria-expanded="false">
+          <h3 class="font-bold text-green-800">Quels sont les avantages du compte Premium ?</h3>
+          <i class='bx bx-chevron-down text-xl text-gray-500'></i>
+        </div>
+        <div id="faq-answer-4" class="faq-answer mt-3 text-gray-700">
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Accès illimité aux numéros certifiés</li>
+            <li>Appels gratuits ou à tarif réduit</li>
+            <li>Affichage sans publicité</li>
+            <li>Support client prioritaire</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Général -->
+      <div class="faq-item bg-white p-5 rounded-xl shadow-md" data-category="general">
+        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(5)" aria-expanded="false">
+          <h3 class="font-bold text-green-800">Puis-je utiliser AllôBénin sans internet ?</h3>
+          <i class='bx bx-chevron-down text-xl text-gray-500'></i>
+        </div>
+        <div id="faq-answer-5" class="faq-answer mt-3 text-gray-700">
+          <p>Oui ! Une fois installée en PWA, AllôBénin fonctionne même hors ligne grâce à la technologie du cache intégré.</p>
+        </div>
+      </div>
+
+      <!-- Numéros -->
+      <div class="faq-item bg-white p-5 rounded-xl shadow-md" data-category="numeros">
+        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(6)" aria-expanded="false">
+          <h3 class="font-bold text-green-800">Comment signaler un numéro erroné ou inactif ?</h3>
+          <i class='bx bx-chevron-down text-xl text-gray-500'></i>
+        </div>
+        <div id="faq-answer-6" class="faq-answer mt-3 text-gray-700">
+          <p>Utilisez le bouton <i class='bx bx-flag text-yellow-500'></i> "Signaler" situé à côté du numéro. Notre équipe vérifiera sous 24h.</p>
+        </div>
+      </div>
+
+      <!-- Paiements -->
+      <div class="faq-item bg-white p-5 rounded-xl shadow-md" data-category="paiements">
+        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(7)" aria-expanded="false">
+          <h3 class="font-bold text-green-800">Quels moyens de paiement acceptez-vous ?</h3>
+          <i class='bx bx-chevron-down text-xl text-gray-500'></i>
+        </div>
+        <div id="faq-answer-7" class="faq-answer mt-3 text-gray-700">
+          <ul class="list-disc pl-5 space-y-1">
+            <li>MTN Mobile Money</li>
+            <li>Moov Money</li>
+            <li>Cartes bancaires Visa & Mastercard</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Premium -->
+      <div class="faq-item bg-white p-5 rounded-xl shadow-md" data-category="premium">
+        <div class="flex justify-between items-center cursor-pointer" onclick="toggleFAQ(8)" aria-expanded="false">
+          <h3 class="font-bold text-green-800">Puis-je annuler mon abonnement Premium ?</h3>
+          <i class='bx bx-chevron-down text-xl text-gray-500'></i>
+        </div>
+        <div id="faq-answer-8" class="faq-answer mt-3 text-gray-700">
+          <p>Oui, à tout moment depuis votre espace personnel. Le service restera actif jusqu’à la fin de la période payée.</p>
+        </div>
+      </div>
+    </div>
+
+    <p id="noResults" class="text-center text-gray-500 mt-4 hidden">Aucune question ne correspond à votre recherche.</p>
+
+    <div class="mt-12 bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+      <i class='bx bx-question-mark text-4xl text-green-600 mb-4'></i>
+      <h3 class="text-xl font-bold mb-2">Vous ne trouvez pas de réponse ?</h3>
+      <a href="contact.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-medium">
+        <i class='bx bx-chat mr-1'></i> Contactez-nous
+      </a>
+    </div>
+  </main>
+
+   <!-- Footer -->
+  <footer class="bg-green-800 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center">
+            <div class="bg-yellow-400 p-2 rounded-full mr-2">
+              <i class='bx bx-phone-call text-white text-xl'></i>
+            </div>
+            <span class="text-xl font-bold">AllôBénin</span>
+          </div>
+          <p class="mt-2 text-green-200">Votre annuaire de confiance</p>
+        </div>
+        <div class="flex space-x-6">
+          <a href="legal.html" class="hover:text-yellow-400">Mentions légales</a>
+          <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+        </div>
+      </div>
+      <div class="mt-6 text-center text-green-300 text-sm">
+        © 2025 AllôBénin - Tous droits réservés
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

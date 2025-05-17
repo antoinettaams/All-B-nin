@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À Propos - AllôBénin</title>
+  <!-- Mêmes dépendances que index.html -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+   <!-- Header -->
+  <header class="bg-green-500 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center">
+        <div class="bg-yellow-400 p-2 rounded-full mr-2">
+          <i class='bx bx-phone-call text-white text-2xl'></i>
+        </div>
+        <span class="text-2xl font-bold text-green-800">AllôBénin</span>
+      </a>
+      
+      <!-- Navigation Desktop -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html" class="text-white">Accueil</a>
+        <a href="services.html"class="text-white">Parcourir les services</a>
+        <a href="about.html" class="text-white font-medium hover: border-b border-white">À propos</a>
+        <a href="contact.html" class="text-white">Contact</a>
+        <a href="faq.html" class="text-white">FAQ</a>
+      </nav>
+
+      <!-- Menu Mobile -->
+      <button id="mobileMenuButton" class="md:hidden text-green-800">
+        <i class='bx bx-menu text-3xl'></i>
+      </button>
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-4 pb-4">
+      <a href="index.html" class="block py-2">Accueil</a>
+      <a href="services.html"class="block py-2">Parcourir les services</a>
+      <a href="about.html" class="block py-2 text-green-800">À propos</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+      <a href="faq.html" class="block py-2">FAQ</a>
+    </div>
+  </header>
+
+  <!-- Contenu Principal -->
+  <main class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Section Mission -->
+    <section class="mb-12 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-red-500 mb-4">Notre Mission</h1>
+      <div class="bg-white p-6 rounded-xl shadow-md">
+        <p class="text-lg text-gray-700">
+          Connecter les citoyens aux services essentiels partout au Bénin grâce à un annuaire numérique fiable et actualisé.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section Histoire -->
+    <section class="mb-12 bg-white p-6 rounded-xl shadow-md">
+      <h2 class="text-2xl font-bold text-green-800 mb-4">Notre Histoire</h2>
+      <div class="flex items-start">
+        <div class="hidden md:block flex-shrink-0 mr-6">
+          <i class='bx bx-time-five text-5xl text-yellow-400'></i>
+        </div>
+        <div>
+          <p class="mb-4 text-gray-700">
+            Fondé en 2025 à Cotonou, AllôBénin est né d'un constat simple : <span class="font-semibold">80% des Béninois</span> ont déjà perdu du temps à chercher un numéro utile.
+          </p>
+          <p class="text-gray-700">
+            Aujourd'hui, notre plateforme référence <span class="font-semibold">500+</span> services vérifiés à travers tout le pays.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Témoignage -->
+    <div class="bg-white p-6 rounded-xl shadow-md my-8">
+      <blockquote>
+        <i class='bx bxs-quote-alt-left text-2xl text-yellow-400'></i>
+        <p class="text-gray-700 italic mb-4">
+          "AllôBénin m'a sauvé la vie quand j'ai eu besoin d'un électricien en urgence à minuit !"
+        </p>
+        <div class="flex items-center">
+          <div class="bg-gray-200 w-10 h-10 rounded-full mr-3"></div>
+          <div>
+            <div class="font-semibold">Aïcha D.</div>
+            <div class="text-sm text-gray-500">Utilisatrice à Parakou</div>
+          </div>
+        </div>
+      </blockquote>
+    </div>
+
+    <!-- Section Valeurs -->
+    <section class="bg-green-50 p-8 rounded-xl mb-12">
+      <h2 class="text-2xl font-bold text-green-800 mb-4">Nos Valeurs</h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        <div class="bg-white p-4 rounded-lg flex items-start">
+          <i class='bx bx-check-shield text-green-600 text-2xl mr-3'></i>
+          <div>
+            <h3 class="font-bold mb-1">Fiabilité</h3>
+            <p class="text-gray-600 text-sm">Tous nos numéros sont vérifiés mensuellement</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg flex items-start">
+          <i class='bx bx-coin-stack text-yellow-500 text-2xl mr-3'></i>
+          <div>
+            <h3 class="font-bold mb-1">Accessibilité</h3>
+            <p class="text-gray-600 text-sm">Service gratuit pour les numéros essentiels</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg flex items-start">
+          <i class='bx bx-refresh text-blue-500 text-2xl mr-3'></i>
+          <div>
+            <h3 class="font-bold mb-1">Actualité</h3>
+            <p class="text-gray-600 text-sm">Mise à jour permanente de notre base</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chiffres Clés -->
+    <section class="my-12">
+      <h2 class="text-2xl font-bold text-red-500 mb-6 text-center">AllôBénin en Chiffres</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="bg-white p-4 rounded-xl shadow">
+          <div class="text-3xl font-bold text-green-600">500+</div>
+          <div class="text-gray-600 text-sm">Numéros vérifiés</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow">
+          <div class="text-3xl font-bold text-green-600">24h/24</div>
+          <div class="text-gray-600 text-sm">Disponibilité</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow">
+          <div class="text-3xl font-bold text-green-600">04</div>
+          <div class="text-gray-600 text-sm">Villes couvertes</div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow">
+          <div class="text-3xl font-bold text-green-600">98%</div>
+          <div class="text-gray-600 text-sm">Satisfaction</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partenaires -->
+    <section class="my-12">
+      <h2 class="text-2xl font-bold text-green-800 mb-6 text-center">Nos Partenaires</h2>
+      <div class="flex flex-wrap justify-center gap-6 bg-white p-6 rounded-xl shadow">
+        <div class="w-32 h-20 bg-gray-100 flex items-center justify-center rounded-lg">
+          <i class='bx bxs-building-house text-3xl text-gray-400'></i>
+        </div>
+        <div class="w-32 h-20 bg-gray-100 flex items-center justify-center rounded-lg">
+          <i class='bx bxs-bank text-3xl text-gray-400'></i>
+        </div>
+        <div class="w-32 h-20 bg-gray-100 flex items-center justify-center rounded-lg">
+          <i class='bx bxs-first-aid text-3xl text-gray-400'></i>
+        </div>
+      </div>
+      <p class="text-center mt-4 text-sm text-gray-600">
+        <a href="contact.html" class="text-green-600 hover:underline">Devenez partenaire</a>
+      </p>
+    </section>
+
+    <!-- CTA -->
+    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center my-8">
+      <h3 class="text-xl font-bold mb-3">Vous êtes un service public ou une entreprise ?</h3>
+      <p class="mb-4">Référencez-vous sur AllôBénin pour augmenter votre visibilité</p>
+      <a href="contact.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700">
+        Nous contacter
+      </a>
+    </div>
+  </main> 
+
+    <!-- Footer -->
+  <footer class="bg-green-500 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center">
+            <div class="bg-yellow-400 p-2 rounded-full mr-2">
+              <i class='bx bx-phone-call text-white text-xl'></i>
+            </div>
+            <span class="text-xl font-bold">AllôBénin</span>
+          </div>
+          <p class="mt-2 text-white">Votre annuaire de contacts</p>
+        </div>
+        <div class="flex space-x-6">
+          <a href="legal.html" class="hover:text-yellow-400">Mentions légales</a>
+          <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+        </div>
+      </div>
+      <div class="mt-6 text-center text-white text-sm">
+        © 2025 AllôBénin - Tous droits réservés
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

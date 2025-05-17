@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AllôBénin - Annuaire Géolocalisé</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .filter-btn.active { background-color: #2F855A; color: white; }
+    .contact-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    #map { height: 400px; border-radius: 0.5rem; }
+    .modal { transition: all 0.3s ease; }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <header class="bg-green-500 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="flex items-center">
+        <div class="bg-yellow-400 p-2 rounded-full mr-2">
+          <i class='bx bx-phone-call text-white text-2xl'></i>
+        </div>
+        <span class="text-2xl font-bold text-green-800">AllôBénin</span>
+      </a>
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html" class="text-white">Accueil</a>
+        <a href="services.html" class="text-white">Parcourir les services</a>
+        <a href="about.html" class="text-white">À propos</a>
+        <a href="contact.html" class="text-white">Contact</a>
+        <a href="faq.html" class="text-white">FAQ</a>
+      </nav>
+      <button id="mobileMenuButton" class="md:hidden text-green-800">
+        <i class='bx bx-menu text-3xl'></i>
+      </button>
+    </div>
+  </header>
+  <!-- Section : Pourquoi utiliser AllôBénin -->
+<section class="container mx-auto mt-16 px-6">
+    <h2 class="text-3xl font-bold text-green-800 text-center mb-8">Pourquoi utiliser AllôBénin ?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+            <div class="flex justify-center mb-4">
+                <i class='bx bx-money text-4xl text-yellow-400'></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Prix Compétitifs</h3>
+            <p class="text-gray-600">Accédez à des services sans frais de commission pour un coût abordable.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+            <div class="flex justify-center mb-4">
+                <i class='bx bx-shield text-4xl text-yellow-400'></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Sécurité et Fiabilité</h3>
+            <p class="text-gray-600">Les numéros sont vérifiés pour garantir des services de qualité.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+            <div class="flex justify-center mb-4">
+                <i class='bx bx-search text-4xl text-yellow-400'></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Recherche Simplifiée</h3>
+            <p class="text-gray-600">Trouvez rapidement les contacts essentiels avec des filtres clairs.</p>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

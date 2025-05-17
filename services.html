@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services- AllôBénin</title>
+  <!-- CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    .filter-btn.active {
+      background-color: #2F855A;
+      color: white;
+    }
+    .contact-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    #map { height: 400px; border-radius: 0.5rem; }
+    .modal {
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-green-500 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="flex items-center">
+        <div class="bg-yellow-400 p-2 rounded-full mr-2">
+          <i class='bx bx-phone-call text-white text-2xl'></i>
+        </div>
+        <span class="text-2xl font-bold text-green-800">AllôBénin</span>
+      </a>
+      
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html" class="text-white">Accueil</a>
+        <a href="services.html"class="text-white font-medium hover: border-b border-white">Parcourir les services</a>
+        <a href="about.html" class="text-white">À propos</a>
+        <a href="contact.html" class="text-white">Contact</a>
+        <a href="faq.html" class="text-white">FAQ</a>
+      </nav>
+
+      <button id="mobileMenuButton" class="md:hidden text-green-800">
+        <i class='bx bx-menu text-3xl'></i>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-4 pb-4">
+      <a href="index.html" class="block py-2">Accueil</a>
+      <a href="services.html"class="block py-2 text-green-800">Parcourir les services</a>
+      <a href="about.html" class="block py-2">À propos</a>
+      <a href="contact.html" class="block py-2">Contact</a>
+      <a href="faq.html" class="block py-2">FAQ</a>
+    </div>
+  </header>
+
+  <!-- Modals -->
+  <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+      <h3 class="text-xl font-bold mb-4">Paiement MoMo</h3>
+      <p id="paymentDetails" class="mb-4">Vous allez payer <span id="paymentAmount">0</span> FCFA pour <span id="paymentContact"></span></p>
+      
+      <div class="mb-4">
+        <label class="block mb-2">Numéro MoMo</label>
+        <input type="tel" id="momoNumber" placeholder="229XXXXXXXX" 
+               class="w-full p-2 border rounded-lg">
+      </div>
+      
+      <div class="flex space-x-4">
+        <button id="confirmPayment" class="flex-1 bg-green-600 text-white py-2 rounded-lg">
+          Payer
+        </button>
+        <button onclick="closeModal('paymentModal')" class="flex-1 bg-gray-300 py-2 rounded-lg">
+          Annuler
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="subscriptionModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+      <h3 class="text-xl font-bold mb-4">Abonnement Premium</h3>
+      <p class="mb-4">Choisissez votre formule :</p>
+      
+      <div class="space-y-4 mb-6">
+        <div class="border rounded-lg p-4 hover:border-green-500 transition">
+          <h4 class="font-bold">Mensuel</h4>
+          <p>3000 FCFA/mois</p>
+          <button onclick="initMoMoSubscription('monthly')" class="mt-2 bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition">
+            S'abonner
+          </button>
+        </div>
+        
+        <div class="border rounded-lg p-4 hover:border-green-500 transition">
+          <h4 class="font-bold">Annuel</h4>
+          <p>30 000 FCFA/an (2 mois offerts)</p>
+          <button onclick="initMoMoSubscription('yearly')" class="mt-2 bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition">
+            S'abonner
+          </button>
+        </div>
+      </div>
+      
+      <button onclick="closeModal('subscriptionModal')" class="w-full bg-gray-300 py-2 rounded-lg hover:bg-gray-400 transition">
+        Plus tard
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenu Principal -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <section class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-4">Annuaire des numéros utiles au Bénin</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Trouvez rapidement des contacts dont vous avez besoin partout au Bénin
+      </p>
+    </section>
+
+    <!-- Barre de Recherche et Filtres -->
+    <div class="mb-8">
+      <input type="text" id="searchInput" placeholder="Rechercher un contact..." 
+             class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+    </div>
+
+    <div class="mb-8 grid grid-cols-2 md:grid-cols-5 gap-4">
+      <!-- Filtre Ville -->
+      <div>
+        <label for="cityFilter" class="block mb-2 font-medium">Ville</label>
+        <select id="cityFilter" class="w-full p-2 border rounded-lg">
+          <option value="all">Toutes les villes</option>
+        </select>
+      </div>
+
+      <!-- Filtre Catégorie -->
+      <div>
+        <label for="categoryFilter" class="block mb-2 font-medium">Catégorie</label>
+        <select id="categoryFilter" class="w-full p-2 border rounded-lg">
+          <option value="all">Toutes catégories</option>
+          <option value="urgence">Urgence</option>
+          <option value="sante">Santé</option>
+          <option value="artisan">Artisans</option>
+          <option value="transport">Transport</option>
+        </select>
+      </div>
+
+      <!-- Filtre Distance -->
+      <div>
+        <label for="distanceFilter" class="block mb-2 font-medium">Distance max</label>
+        <select id="distanceFilter" class="w-full p-2 border rounded-lg">
+          <option value="5">5 km</option>
+          <option value="10" selected>10 km</option>
+          <option value="20">20 km</option>
+          <option value="50">50 km</option>
+        </select>
+      </div>
+
+      <!-- Filtre Notation -->
+      <div>
+        <label for="ratingFilter" class="block mb-2 font-medium">Note minimale</label>
+        <select id="ratingFilter" class="w-full p-2 border rounded-lg">
+          <option value="0">Toutes notes</option>
+          <option value="3">3 étoiles +</option>
+          <option value="4">4 étoiles +</option>
+        </select>
+      </div>
+
+      <!-- Filtre Prix -->
+      <div>
+        <label for="priceFilter" class="block mb-2 font-medium">Prix</label>
+        <select id="priceFilter" class="w-full p-2 border rounded-lg">
+          <option value="all">Tous</option>
+          <option value="free">Gratuit</option>
+          <option value="paid">Payant</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Bouton Géolocalisation -->
+    <div class="mb-6">
+      <button id="locationFilter" class="w-full bg-yellow-500 hover:bg-yellow-700 text-white py-3 rounded-lg flex items-center justify-center transition">
+        <i class='bx bx-map-pin mr-2'></i> Trouver les numéros près de moi
+      </button>
+      <p id="locationStatus" class="text-sm mt-2 text-center text-gray-600"></p>
+    </div>
+
+    <!-- Carte (cachée par défaut) -->
+    <div id="mapContainer" class="mt-8 hidden">
+      <h3 class="text-xl font-bold mb-4 text-center">Contacts à proximité</h3>
+      <div id="map"></div>
+    </div>
+
+    <!-- Liste des Contacts -->
+    <div id="contactsContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-8">
+      <!-- Les contacts seront chargés ici -->
+    </div>
+
+    <!-- Section Premium -->
+    <section class="mt-16 bg-gradient-to-r from-green-600 to-green-800 text-white rounded-xl p-8 text-center">
+      <h2 class="text-2xl font-bold mb-4">Passez à la version Premium</h2>
+      <p class="mb-6 max-w-2xl mx-auto">
+        Accédez à tous les numéros certifiés avec leur position exacte et bénéficiez d'appels prioritaires
+      </p>
+      <button onclick="openModal('subscriptionModal')" 
+              class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-6 py-3 rounded-lg font-bold transition">
+        S'abonner - À partir de 3000 FCFA/mois
+      </button>
+    </section>
+
+    <!-- Témoignages -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-center mb-8">Ce que disent nos utilisateurs</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="testimonialsContainer">
+        <!-- Témoignages chargés en JS -->
+      </div>
+    </section>
+  </main>
+
+   <!-- Footer -->
+  <footer class="bg-green-500 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center">
+            <div class="bg-yellow-400 p-2 rounded-full mr-2">
+              <i class='bx bx-phone-call text-white text-xl'></i>
+            </div>
+            <span class="text-xl font-bold">AllôBénin</span>
+          </div>
+          <p class="mt-2 text-white">Votre annuaire de contacts</p>
+        </div>
+        <div class="flex space-x-6">
+          <a href="legal.html" class="hover:text-yellow-400">Mentions légales</a>
+          <a href="contact.html" class="hover:text-yellow-400">Contact</a>
+        </div>
+      </div>
+      <div class="mt-6 text-center text-white text-sm">
+        © 2025 AllôBénin - Tous droits réservés
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Leaflet JS -->
+  <script src="script.js"></script>
+</body>
+</html>
